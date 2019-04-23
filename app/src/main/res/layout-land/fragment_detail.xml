@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".Fragments.DetailFragment">
+
+    <LinearLayout
+        android:id="@+id/detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:background="#e5fffb"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/img_detail"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_margin="20dp"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/detail_pokemonId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pokedex #"
+                        android:textSize="25sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/detail_pokemonName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pokemon Name"
+                        android:textSize="25sp"
+                        android:textColor="@color/Black"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:id="@+id/tv_types"
+                        android:textSize="25sp"
+                        android:textColor="@color/Black"
+                        android:text="Types"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:id="@+id/tv_height"
+                        android:textSize="25sp"
+                        android:textColor="@color/Black"
+                        android:text="Height"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:id="@+id/tv_weight"
+                        android:textSize="25sp"
+                        android:textColor="@color/Black"
+                        android:text="Weight"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textSize="25sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Starting Abilities"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_abilities"
+                        android:gravity="center"
+                        android:textSize="25sp"
+                        android:textColor="@color/Black"
+                        android:text="Abilities"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

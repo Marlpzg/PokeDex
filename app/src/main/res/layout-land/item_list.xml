@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        android:layout_margin="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/Imagen"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_margin="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pokemonId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pokedex #1"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/pokemonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pokemon Name"
+                    android:textSize="15sp"
+                    android:textColor="@color/Black"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
