@@ -28,8 +28,7 @@ import kotlinx.android.synthetic.main.item_list.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "pokemones"
 
 /**
  * A simple [Fragment] subclass.
@@ -42,8 +41,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class ListFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var viewAdapter:PokemonAdapter
@@ -74,8 +71,7 @@ class ListFragment : Fragment() {
             pokemonRes = savedInstanceState.getParcelableArrayList("Listado")
         }
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            pokemonRes = it.getParcelableArrayList(ARG_PARAM1)
         }
 
     }
@@ -91,11 +87,6 @@ class ListFragment : Fragment() {
 
 
         return vista
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
@@ -125,11 +116,6 @@ class ListFragment : Fragment() {
 
         searchButton.setOnClickListener{v->
             if (recyclerPokemon != null){
-                try {
-                    loadAll.stopping = true
-                }catch (e: UninitializedPropertyAccessException){
-                    println("Nel")
-                }
                 loadAll = FetchPokemonTask()
                 loadAll.execute(txt_type.text.toString().toLowerCase(), "type")
             }
@@ -153,7 +139,6 @@ class ListFragment : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
@@ -168,11 +153,10 @@ class ListFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(list: ArrayList<Pokemon>) =
             ListFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelableArrayList(ARG_PARAM1, list)
                 }
             }
     }
@@ -182,7 +166,6 @@ class ListFragment : Fragment() {
         private lateinit var task: String
         private var index: Int = 0
         private var limit: Int = 0
-        var stopping = false
 
         override fun doInBackground(vararg pokemonNumbers: String): String? {
 
@@ -201,7 +184,7 @@ class ListFragment : Fragment() {
 
             val pokeAPI = NetworkUtils.buildUrl(ID, search)
 
-            if (recyclerPokemon == null || stopping == true){
+            if (recyclerPokemon == null){
                 println("Final")
                 this.cancel(true)
                 return ""
@@ -226,7 +209,7 @@ class ListFragment : Fragment() {
 
                     for(i in 0..(pokemones.length()-1)){
                         FetchPokemonTask().execute(pokemones.getJSONObject(i).getJSONObject("pokemon").getString("name"), "pokemon", i.toString(), pokemones.length().toString())
-                        if(recyclerPokemon == null || stopping == true){
+                        if(recyclerPokemon == null){
                             return
                         }
                     }
@@ -282,7 +265,6 @@ class ListFragment : Fragment() {
         viewAdapter.setOnClickListener(View.OnClickListener {
             if(pokemonRes.get(recyclerPokemon.getChildAdapterPosition(it)).id != "Empty") {
                 comunicacion.sendData(pokemonRes.get(recyclerPokemon.getChildAdapterPosition(it)))
-                loadAll.stopping = true
             }
         })
 
@@ -292,6 +274,7 @@ class ListFragment : Fragment() {
             adapter = viewAdapter
 
         }
+
 
     }
 }

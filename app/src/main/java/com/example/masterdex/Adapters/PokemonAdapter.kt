@@ -11,7 +11,7 @@ import com.example.masterdex.R
 import kotlinx.android.synthetic.main.item_list.view.*
 import org.json.JSONObject
 
-class PokemonAdapter(val items: List<Pokemon>) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>(), View.OnClickListener {
+class PokemonAdapter(var items: List<Pokemon>) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>(), View.OnClickListener {
 
     private lateinit var listener: View.OnClickListener
 
@@ -44,6 +44,10 @@ class PokemonAdapter(val items: List<Pokemon>) : RecyclerView.Adapter<PokemonAda
 
     }
 
+    fun setList(items:List<Pokemon>) {
+        this.items = items
+        notifyDataSetChanged()
+    }
     class PokemonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: Pokemon) = with(itemView){

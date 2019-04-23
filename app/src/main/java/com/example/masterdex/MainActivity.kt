@@ -10,6 +10,9 @@ import com.example.masterdex.Interfaces.FragmentCommunication
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener, FragmentCommunication {
+    var listaGlobal: ArrayList<Pokemon> = ArrayList()
+
+
     lateinit var lista: ListFragment
     var detalle: DetailFragment? = null
 
@@ -17,22 +20,19 @@ class MainActivity : AppCompatActivity(), DetailFragment.OnFragmentInteractionLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(contenedorFragment != null){
-            if(savedInstanceState != null){
-                return
-            }
 
-            lista = ListFragment()
+        if(savedInstanceState == null) {
+            lista = ListFragment();
 
-            supportFragmentManager.beginTransaction().replace(R.id.contenedorFragment, lista).commit()
-
+            supportFragmentManager.beginTransaction().add(R.id.contenedorFragment, lista).commit()
         }
+
 
     }
 
     override fun sendData(data: Pokemon) {
 
-        if(contenedorFragment == null) {
+        if(fragDetail != null) {
             detalle = this.supportFragmentManager.findFragmentById(R.id.fragDetail) as DetailFragment
         }
 
