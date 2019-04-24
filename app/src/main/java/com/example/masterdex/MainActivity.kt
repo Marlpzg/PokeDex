@@ -8,6 +8,7 @@ import com.example.masterdex.Fragments.DetailFragment
 import com.example.masterdex.Fragments.ListFragment
 import com.example.masterdex.Interfaces.FragmentCommunication
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 class MainActivity : AppCompatActivity(), DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener, FragmentCommunication {
     var listaGlobal: ArrayList<Pokemon> = ArrayList()
@@ -24,26 +25,23 @@ class MainActivity : AppCompatActivity(), DetailFragment.OnFragmentInteractionLi
         if(savedInstanceState == null) {
             lista = ListFragment();
 
-            supportFragmentManager.beginTransaction().add(R.id.contenedorFragment, lista).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.contenedorFragment, lista).commit()
         }
-
 
     }
 
     override fun sendData(data: Pokemon) {
 
+
+
+        detalle = DetailFragment()
+        var datosEnviados: Bundle = Bundle()
+        datosEnviados.putSerializable("Datos", data)
+        detalle?.arguments = datosEnviados
+
         if(fragDetail != null) {
-            detalle = this.supportFragmentManager.findFragmentById(R.id.fragDetail) as DetailFragment
-        }
-
-        if(detalle != null){
-            detalle?.asignarDatos(data, this.findViewById(R.id.fragDetail), this.findViewById(R.id.img_detail))
-
+            supportFragmentManager.beginTransaction().add(R.id.fragDetail, detalle!!).commit()
         }else{
-            detalle = DetailFragment()
-            var datosEnviados: Bundle = Bundle()
-            datosEnviados.putSerializable("Datos", data)
-            detalle?.arguments = datosEnviados
 
             //Fragment en activity
             supportFragmentManager.beginTransaction().replace(R.id.contenedorFragment, detalle!!).addToBackStack(null).commit()
